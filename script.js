@@ -4,7 +4,7 @@ const itDevCheckbox = document.querySelector('input[value="IT Developer Club"]')
 const peminatanGroup = document.getElementById('peminatan-group');
 const peminatanSelect = document.getElementById('peminatan');
 
-// Tampilkan atau sembunyikan peminatan jika IT Dev dicentang
+// Tampilkan/sembunyikan peminatan saat IT Dev dipilih
 itDevCheckbox.addEventListener('change', () => {
     peminatanGroup.style.display = itDevCheckbox.checked ? 'block' : 'none';
     if (!itDevCheckbox.checked) {
@@ -12,7 +12,7 @@ itDevCheckbox.addEventListener('change', () => {
     }
 });
 
-// Batasi maksimal 3 ekskul
+// Maksimal 3 ekskul
 document.querySelectorAll('input[name="ekskul"]').forEach(cb => {
     cb.addEventListener('change', () => {
         const selected = document.querySelectorAll('input[name="ekskul"]:checked');
@@ -50,7 +50,7 @@ form.addEventListener('submit', function (e) {
         return;
     }
 
-    // Validasi peminatan jika pilih IT Developer Club
+    // Validasi peminatan jika pilih IT Dev
     if (checkedEkskul.includes("IT Developer Club") && peminatan === "") {
         notif.textContent = "⚠️ Pilih peminatan di IT Developer Club.";
         notif.classList.remove('hidden');
@@ -75,7 +75,10 @@ form.addEventListener('submit', function (e) {
             peminatan: checkedEkskul.includes("IT Developer Club") ? peminatan : ""
         })
     })
-    .then(res => res.json())
+    .then(res => {
+        if (!res.ok) throw new Error("Gagal kirim data");
+        return res.json();
+    })
     .then(res => {
         if (res.status === "success") {
             showToast("✅ Pendaftaran berhasil dikirim!");
