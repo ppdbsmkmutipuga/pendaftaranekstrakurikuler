@@ -3,9 +3,8 @@ const notif = document.getElementById('notif');
 const itDevCheckbox = document.querySelector('input[value="IT Developer Club"]');
 const peminatanGroup = document.getElementById('peminatan-group');
 const peminatanSelect = document.getElementById('peminatan');
-const submitBtn = form.querySelector('button[type="submit"]');
+const submitBtn = document.getElementById('submitBtn');
 
-// Tampilkan/sembunyikan peminatan saat IT Dev dipilih
 itDevCheckbox.addEventListener('change', () => {
     peminatanGroup.style.display = itDevCheckbox.checked ? 'block' : 'none';
     if (!itDevCheckbox.checked) {
@@ -13,7 +12,6 @@ itDevCheckbox.addEventListener('change', () => {
     }
 });
 
-// Maksimal 3 ekskul
 document.querySelectorAll('input[name="ekskul"]').forEach(cb => {
     cb.addEventListener('change', () => {
         const selected = document.querySelectorAll('input[name="ekskul"]:checked');
@@ -24,10 +22,10 @@ document.querySelectorAll('input[name="ekskul"]').forEach(cb => {
     });
 });
 
-// Fungsi toast
-function showToast(message) {
+function showToast(message, isError = false) {
     const toast = document.getElementById("toast");
     toast.textContent = message;
+    toast.style.backgroundColor = isError ? "#e53e3e" : "#48bb78";
     toast.style.display = "block";
     setTimeout(() => {
         toast.style.display = "none";
@@ -44,14 +42,12 @@ form.addEventListener('submit', function (e) {
     const checkedEkskul = Array.from(document.querySelectorAll('input[name="ekskul"]:checked')).map(el => el.value);
     const peminatan = peminatanSelect.value;
 
-    // Validasi ekskul
     if (checkedEkskul.length === 0 || checkedEkskul.length > 3) {
         notif.textContent = "⚠️ Pilih minimal 1 dan maksimal 3 ekstrakurikuler tambahan.";
         notif.classList.remove('hidden');
         return;
     }
 
-    // Validasi peminatan jika pilih IT Dev
     if (checkedEkskul.includes("IT Developer Club") && peminatan === "") {
         notif.textContent = "⚠️ Pilih peminatan di IT Developer Club.";
         notif.classList.remove('hidden');
@@ -70,7 +66,7 @@ form.addEventListener('submit', function (e) {
     formData.append("ekskul", checkedEkskul.join(", "));
     formData.append("peminatan", checkedEkskul.includes("IT Developer Club") ? peminatan : "");
 
-    // Disable tombol kirim saat proses
+    // Tombol loading
     submitBtn.disabled = true;
     submitBtn.textContent = "Mengirim...";
 
@@ -87,11 +83,9 @@ form.addEventListener('submit', function (e) {
                 form.reset();
                 peminatanGroup.style.display = "none";
             } else {
-                showToast("❌ Gagal mengirim data.");
+                showToast("❌ Gagal mengirim data.", true);
             }
         } catch (err) {
-            // Jika tidak bisa parse JSON tapi data masuk
-            console.warn("Respons bukan JSON valid. Tapi kemungkinan berhasil.");
             showToast("✅ Pendaftaran berhasil dikirim!");
             form.reset();
             peminatanGroup.style.display = "none";
@@ -99,7 +93,7 @@ form.addEventListener('submit', function (e) {
     })
     .catch(err => {
         console.error("Detail error:", err);
-        showToast("❌ Terjadi kesalahan saat mengirim data.");
+        showToast("❌ Terjadi kesalahan saat mengirim data.", true);
     })
     .finally(() => {
         submitBtn.disabled = false;
