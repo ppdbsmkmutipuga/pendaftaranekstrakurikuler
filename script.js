@@ -74,35 +74,35 @@ form.addEventListener('submit', function (e) {
     submitBtn.disabled = true;
     submitBtn.textContent = "Mengirim...";
 
-    fetch(endpoint, {
-        method: "POST",
-        body: formData
-    })
-    .then(async res => {
-        const text = await res.text();
-        try {
-            const json = JSON.parse(text);
-            if (json.status === "success") {
-                showToast("✅ Pendaftaran berhasil dikirim!");
-                form.reset();
-                peminatanGroup.style.display = "none";
-            } else {
-                showToast("❌ Gagal mengirim data.");
-            }
-        } catch (err) {
-            // Jika tidak bisa parse JSON tapi data masuk
-            console.warn("Respons bukan JSON valid. Tapi kemungkinan berhasil.");
-            showToast("✅ Pendaftaran berhasil dikirim!");
-            form.reset();
-            peminatanGroup.style.display = "none";
-        }
-    })
-    .catch(err => {
-        console.error("Detail error:", err);
-        showToast("❌ Terjadi kesalahan saat mengirim data.");
-    })
-    .finally(() => {
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Kirim Pendaftaran";
-    });
+  fetch(endpoint, {
+    method: "POST",
+    body: formData
+})
+.then(async res => {
+    const text = await res.text();
+    let isSuccess = false;
+
+    try {
+        const json = JSON.parse(text);
+        isSuccess = json.status === "success";
+    } catch (err) {
+        // Jika bukan JSON valid, cek isi text mengandung success
+        isSuccess = text.toLowerCase().includes("success");
+    }
+
+    if (isSuccess) {
+        showToast("✅ Pendaftaran berhasil dikirim!");
+        form.reset();
+        peminatanGroup.style.display = "none";
+    } else {
+        showToast("❌ Gagal mengirim data.");
+    }
+})
+.catch(err => {
+    console.error("Detail error:", err);
+    showToast("❌ Terjadi kesalahan saat mengirim data.");
+})
+.finally(() => {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Kirim Pendaftaran";
 });
