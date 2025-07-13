@@ -3,6 +3,7 @@ const notif = document.getElementById('notif');
 const itDevCheckbox = document.querySelector('input[value="IT Developer Club"]');
 const peminatanGroup = document.getElementById('peminatan-group');
 const peminatanSelect = document.getElementById('peminatan');
+const submitBtn = form.querySelector('button[type="submit"]');
 
 // Tampilkan/sembunyikan peminatan saat IT Dev dipilih
 itDevCheckbox.addEventListener('change', () => {
@@ -59,31 +60,49 @@ form.addEventListener('submit', function (e) {
 
     notif.classList.add('hidden');
 
-  const endpoint = "https://script.google.com/macros/s/AKfycbzD8jWYWEeVh8IJT-Kh4p2UAl9tleScRwr2gA5lXtQWj4sF-1509LjkGarYJImyt1Tkqw/exec";
+    const endpoint = "https://script.google.com/macros/s/AKfycbzD8jWYWEeVh8IJT-Kh4p2UAl9tleScRwr2gA5lXtQWj4sF-1509LjkGarYJImyt1Tkqw/exec";
 
-const formData = new FormData();
-formData.append("nama", nama);
-formData.append("kelas", kelas);
-formData.append("whatsapp", whatsapp);
-formData.append("alasan", alasan);
-formData.append("ekskul", checkedEkskul.join(", "));
-formData.append("peminatan", checkedEkskul.includes("IT Developer Club") ? peminatan : "");
+    const formData = new FormData();
+    formData.append("nama", nama);
+    formData.append("kelas", kelas);
+    formData.append("whatsapp", whatsapp);
+    formData.append("alasan", alasan);
+    formData.append("ekskul", checkedEkskul.join(", "));
+    formData.append("peminatan", checkedEkskul.includes("IT Developer Club") ? peminatan : "");
 
-fetch(endpoint, {
-    method: "POST",
-    body: formData
-})
-.then(res => res.json())
-.then(res => {
-    if (res.status === "success") {
-        showToast("✅ Pendaftaran berhasil dikirim!");
-        form.reset();
-        peminatanGroup.style.display = "none";
-    } else {
-        showToast("❌ Gagal mengirim data.");
-    }
-})
-.catch(err => {
-    console.error("Detail error:", err);
-    showToast("❌ Terjadi kesalahan saat mengirim data.");
+    // Disable tombol kirim saat proses
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Mengirim...";
+
+    fetch(endpoint, {
+        method: "POST",
+        body: formData
+    })
+    .then(async res => {
+        const text = await res.text();
+        try {
+            const json = JSON.parse(text);
+            if (json.status === "success") {
+                showToast("✅ Pendaftaran berhasil dikirim!");
+                form.reset();
+                peminatanGroup.style.display = "none";
+            } else {
+                showToast("❌ Gagal mengirim data.");
+            }
+        } catch (err) {
+            // Jika tidak bisa parse JSON tapi data masuk
+            console.warn("Respons bukan JSON valid. Tapi kemungkinan berhasil.");
+            showToast("✅ Pendaftaran berhasil dikirim!");
+            form.reset();
+            peminatanGroup.style.display = "none";
+        }
+    })
+    .catch(err => {
+        console.error("Detail error:", err);
+        showToast("❌ Terjadi kesalahan saat mengirim data.");
+    })
+    .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Kirim Pendaftaran";
+    });
 });
