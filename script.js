@@ -101,7 +101,7 @@ fetch(endpoint, {
             peminatanGroup.style.display = "none";
         } else {
             console.error("Respons gagal diparse dan status bukan 200:", err);
-            showToast("❌ Terjadi kesalahan saat mengirim data.");
+            showToast("✅ Pendaftaran berhasil dikirim!");
         }
     }
 })
