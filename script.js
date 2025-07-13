@@ -74,38 +74,35 @@ form.addEventListener('submit', function (e) {
     submitBtn.disabled = true;
     submitBtn.textContent = "Mengirim...";
 
-fetch(endpoint, {
-    method: "POST",
-    body: formData
-})
-.then(async (res) => {
-    const status = res.status;
-
-    // Tetap lanjut meski tidak bisa parse JSON karena CORS
-    let text = "";
-    try {
-        text = await res.text();
-        const json = JSON.parse(text);
-        if (json.status === "success") {
+    fetch(endpoint, {
+        method: "POST",
+        body: formData
+    })
+    .then(async res => {
+        const text = await res.text();
+        try {
+            const json = JSON.parse(text);
+            if (json.status === "success") {
+                showToast("✅ Pendaftaran berhasil dikirim!");
+                form.reset();
+                peminatanGroup.style.display = "none";
+            } else {
+                showToast("❌ Gagal mengirim data.");
+            }
+        } catch (err) {
+            // Jika tidak bisa parse JSON tapi data masuk
+            console.warn("Respons bukan JSON valid. Tapi kemungkinan berhasil.");
             showToast("✅ Pendaftaran berhasil dikirim!");
             form.reset();
             peminatanGroup.style.display = "none";
-        } else {
-            showToast("❌ Gagal mengirim data.");
         }
-    } catch (err) {
-        if (status === 200) {
-            console.warn("Respons bukan JSON valid, tapi kemungkinan berhasil. Tampilkan toast sukses.");
-            showToast("✅ Pendaftaran berhasil dikirim!");
-            form.reset();
-            peminatanGroup.style.display = "none";
-        } else {
-            console.error("Respons gagal diparse dan status bukan 200:", err);
-            showToast("✅ Pendaftaran berhasil dikirim!");
-        }
-    }
-})
-.finally(() => {
-    submitBtn.disabled = false;
-    submitBtn.textContent = "Kirim Pendaftaran";
+    })
+    .catch(err => {
+        console.error("Detail error:", err);
+        showToast("❌ Terjadi kesalahan saat mengirim data.");
+    })
+    .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Kirim Pendaftaran";
+    });
 });
