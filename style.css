@@ -139,7 +139,9 @@ button:hover {
     background-color: #5a67d8;
     transform: scale(1.02);
 }
-
+.hidden {
+  display: none;
+}
 .notif {
     margin-top: 10px;
     padding: 10px;
