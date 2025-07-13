@@ -89,7 +89,7 @@ form.addEventListener('submit', function (e) {
         }
     })
     .catch(err => {
-        console.error(err);
+        console.error("Detail error:", err);
         showToast("❌ Terjadi kesalahan saat mengirim data.");
     });
 });
