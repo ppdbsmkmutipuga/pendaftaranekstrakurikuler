@@ -156,20 +156,25 @@
 
 
 
-
-                <div class="form-group">
-                    <label for="alasan">Alasan Memilih Ekstrakurikuler</label>
-                    <textarea id="alasan" name="alasan" placeholder="Tulis alasanmu di sini..." required></textarea>
-                </div>
-
-                <button type="submit">Kirim Pendaftaran</button>
-                <!-- Tambahkan di sini -->
-<p id="notif" class="hidden" style="color: red; margin-top: 10px;"></p>
-        </form>
-    </div>
-<div id="toast" style="display:none; position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:#48bb78; color:white; padding:12px 24px; border-radius:6px; font-weight:bold; box-shadow:0 4px 10px rgba(0,0,0,0.2); z-index:999;">
-  ✅ Pendaftaran berhasil dikirim!
+<div class="form-group">
+    <label for="alasan">Alasan Memilih Ekstrakurikuler</label>
+    <textarea id="alasan" name="alasan" placeholder="Tulis alasanmu di sini..." required></textarea>
 </div>
+
+<!-- Tombol Kirim -->
+<div class="form-group">
+    <button type="submit" id="submitBtn">Kirim Pendaftaran</button>
+</div>
+
+<!-- Notifikasi error validasi -->
+<p id="notif" class="hidden" style="color: red; margin-top: 10px;"></p>
+</form>
+</div>
+
+<!-- Toast -->
+<div id="toast" style="display:none; position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:#48bb78; color:white; padding:12px 24px; border-radius:6px; font-weight:bold; box-shadow:0 4px 10px rgba(0,0,0,0.2); z-index:999;">
+</div>
+
 
     <script src="script.js"></script>
 </body>
