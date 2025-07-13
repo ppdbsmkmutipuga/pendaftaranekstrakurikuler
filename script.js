@@ -61,19 +61,20 @@ form.addEventListener('submit', function (e) {
 
     const endpoint = "https://script.google.com/macros/s/AKfycbzD8jWYWEeVh8IJT-Kh4p2UAl9tleScRwr2gA5lXtQWj4sF-1509LjkGarYJImyt1Tkqw/exec";
 
+    const formData = new URLSearchParams();
+    formData.append("nama", nama);
+    formData.append("kelas", kelas);
+    formData.append("whatsapp", whatsapp);
+    formData.append("alasan", alasan);
+    formData.append("ekskul", checkedEkskul.join(", "));
+    formData.append("peminatan", checkedEkskul.includes("IT Developer Club") ? peminatan : "");
+
     fetch(endpoint, {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/x-www-form-urlencoded"
         },
-        body: JSON.stringify({
-            nama,
-            kelas,
-            whatsapp,
-            ekskul: checkedEkskul,
-            alasan,
-            peminatan: checkedEkskul.includes("IT Developer Club") ? peminatan : ""
-        })
+        body: formData.toString()
     })
     .then(res => {
         if (!res.ok) throw new Error("Gagal kirim data");
