@@ -1,0 +1,231 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.card {
+    background: #fff;
+    padding: 40px;
+    max-width: 600px;
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 24px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="tel"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: #f9f9f9;
+    transition: 0.3s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    background: #fff;
+    border-color: #667eea;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.ekskul-grid {
+    display: grid;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+@media (min-width: 600px) {
+    .ekskul-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.ekskul-card {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 16px;
+    background: #f0f4ff;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.ekskul-card:hover {
+    border-color: #667eea;
+    background-color: #e5edff;
+}
+
+.ekskul-card input[type="checkbox"] {
+    margin-top: 4px;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 15px;
+    color: #1e293b;
+}
+
+.desc {
+    font-size: 13px;
+    color: #475569;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background-color: #667eea;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #5a67d8;
+    transform: scale(1.02);
+}
+
+.notif {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #ffe4e6;
+    color: #b91c1c;
+    font-size: 14px;
+}
+
+.notif.hidden {
+    display: none;
+}
+
+.ekskul-wajib-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0 0 10px;
+}
+
+.ekskul-wajib-list li {
+    font-size: 14px;
+    color: #333;
+}
+
+/* ==== RESPONSIVE LAYOUT ==== */
+@media (max-width: 768px) {
+    .card {
+        padding: 24px 20px;
+        margin: 16px;
+        border-radius: 12px;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .title {
+        font-size: 14px;
+    }
+
+    .desc {
+        font-size: 12px;
+    }
+
+    button {
+        padding: 12px;
+        font-size: 15px;
+    }
+
+    .notif {
+        font-size: 13px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ekskul-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ekskul-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .ekskul-card input[type="checkbox"] {
+        margin-top: 0;
+    }
+}
+
+@media screen and (orientation: landscape) and (max-width: 768px) {
+    .card {
+        max-height: 95vh;
+        overflow-y: auto;
+    }
+}

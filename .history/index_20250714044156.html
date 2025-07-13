@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pendaftaran Ekstrakurikuler</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="card">
+        <h2>Form Pendaftaran Ekstrakurikuler</h2>
+        <form id="formEkskul" action="#" method="POST">
+
+            <div class="form-group">
+                <label for="nama">Nama Lengkap</label>
+                <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" required />
+            </div>
+
+            <div class="form-group">
+                <label for="kelas">Kelas</label>
+                <select id="kelas" name="kelas" required>
+                    <option value="">-- Pilih Kelas --</option>
+                    <option value="X">X</option>
+                    <option value="XI">XI</option>
+                    <option value="XII">XII</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="whatsapp">Nomor WhatsApp</label>
+                <input type="tel" id="whatsapp" name="whatsapp" placeholder="Contoh: 08xxxxxxxxxx" required />
+            </div>
+            <div class="form-group">
+                <label for="ekskul">Pilih Maksimal 3 Ekstrakurikuler</label>
+                <div class="checkbox-list">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="pramuka" name="ekskul" value="Pramuka">
+                        <label for="pramuka">Pramuka</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="paskibra" name="ekskul" value="Paskibra">
+                        <label for="paskibra">Paskibra</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="itdc" name="ekskul" value="IT Developer Club">
+                        <label for="itdc">IT Developer Club</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="futsal" name="ekskul" value="Futsal">
+                        <label for="futsal">Futsal</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="rohis" name="ekskul" value="Rohis">
+                        <label for="rohis">Rohis</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="kir" name="ekskul" value="Karya Ilmiah Remaja">
+                        <label for="kir">Karya Ilmiah Remaja</label>
+                    </div>
+                </div>
+                <small style="color: #555; font-size: 13px;">Pilih maksimal 3 kegiatan ekstrakurikuler.</small>
+            </div>
+
+
+            <div class="form-group">
+                <label for="alasan">Alasan Memilih Ekstrakurikuler</label>
+                <textarea id="alasan" name="alasan" placeholder="Tulis alasanmu di sini..." required></textarea>
+            </div>
+
+            <button type="submit">Kirim Pendaftaran</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
