@@ -59,32 +59,31 @@ form.addEventListener('submit', function (e) {
 
     notif.classList.add('hidden');
 
-    const endpoint = "https://script.google.com/macros/s/AKfycbzD8jWYWEeVh8IJT-Kh4p2UAl9tleScRwr2gA5lXtQWj4sF-1509LjkGarYJImyt1Tkqw/exec";
+  const endpoint = "https://script.google.com/macros/s/AKfycbzD8jWYWEeVh8IJT-Kh4p2UAl9tleScRwr2gA5lXtQWj4sF-1509LjkGarYJImyt1Tkqw/exec";
 
-    const formData = new FormData();
-    formData.append("nama", nama);
-    formData.append("kelas", kelas);
-    formData.append("whatsapp", whatsapp);
-    formData.append("alasan", alasan);
-    formData.append("ekskul", checkedEkskul.join(", "));
-    formData.append("peminatan", checkedEkskul.includes("IT Developer Club") ? peminatan : "");
+const formData = new FormData();
+formData.append("nama", nama);
+formData.append("kelas", kelas);
+formData.append("whatsapp", whatsapp);
+formData.append("alasan", alasan);
+formData.append("ekskul", checkedEkskul.join(", "));
+formData.append("peminatan", checkedEkskul.includes("IT Developer Club") ? peminatan : "");
 
-    fetch(endpoint, {
-        method: "POST",
-        body: formData
-    })
-    .then(res => res.json())
-    .then(res => {
-        if (res.status === "success") {
-            showToast("✅ Pendaftaran berhasil dikirim!");
-            form.reset();
-            peminatanGroup.style.display = "none";
-        } else {
-            showToast("❌ Gagal mengirim data.");
-        }
-    })
-    .catch(err => {
-        console.error("Detail error:", err);
-        showToast("❌ Terjadi kesalahan saat mengirim data.");
-    });
+fetch(endpoint, {
+    method: "POST",
+    body: formData
+})
+.then(res => res.json())
+.then(res => {
+    if (res.status === "success") {
+        showToast("✅ Pendaftaran berhasil dikirim!");
+        form.reset();
+        peminatanGroup.style.display = "none";
+    } else {
+        showToast("❌ Gagal mengirim data.");
+    }
+})
+.catch(err => {
+    console.error("Detail error:", err);
+    showToast("❌ Terjadi kesalahan saat mengirim data.");
 });
