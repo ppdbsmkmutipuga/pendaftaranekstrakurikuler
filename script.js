@@ -74,33 +74,36 @@ form.addEventListener('submit', function (e) {
     submitBtn.disabled = true;
     submitBtn.textContent = "Mengirim...";
 
-  fetch(endpoint, {
+fetch(endpoint, {
     method: "POST",
     body: formData
 })
-.then(async res => {
-    const text = await res.text();
-    let isSuccess = false;
+.then(async (res) => {
+    const status = res.status;
 
+    // Tetap lanjut meski tidak bisa parse JSON karena CORS
+    let text = "";
     try {
+        text = await res.text();
         const json = JSON.parse(text);
-        isSuccess = json.status === "success";
+        if (json.status === "success") {
+            showToast("✅ Pendaftaran berhasil dikirim!");
+            form.reset();
+            peminatanGroup.style.display = "none";
+        } else {
+            showToast("❌ Gagal mengirim data.");
+        }
     } catch (err) {
-        // Jika bukan JSON valid, cek isi text mengandung success
-        isSuccess = text.toLowerCase().includes("success");
+        if (status === 200) {
+            console.warn("Respons bukan JSON valid, tapi kemungkinan berhasil. Tampilkan toast sukses.");
+            showToast("✅ Pendaftaran berhasil dikirim!");
+            form.reset();
+            peminatanGroup.style.display = "none";
+        } else {
+            console.error("Respons gagal diparse dan status bukan 200:", err);
+            showToast("❌ Terjadi kesalahan saat mengirim data.");
+        }
     }
-
-    if (isSuccess) {
-        showToast("✅ Pendaftaran berhasil dikirim!");
-        form.reset();
-        peminatanGroup.style.display = "none";
-    } else {
-        showToast("❌ Gagal mengirim data.");
-    }
-})
-.catch(err => {
-    console.error("Detail error:", err);
-    showToast("❌ Terjadi kesalahan saat mengirim data.");
 })
 .finally(() => {
     submitBtn.disabled = false;
