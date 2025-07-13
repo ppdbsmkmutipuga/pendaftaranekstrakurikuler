@@ -6,10 +6,8 @@ const peminatanSelect = document.getElementById('peminatan');
 
 // Tampilkan atau sembunyikan peminatan jika IT Dev dicentang
 itDevCheckbox.addEventListener('change', () => {
-    if (itDevCheckbox.checked) {
-        peminatanGroup.style.display = 'block';
-    } else {
-        peminatanGroup.style.display = 'none';
+    peminatanGroup.style.display = itDevCheckbox.checked ? 'block' : 'none';
+    if (!itDevCheckbox.checked) {
         peminatanSelect.value = "";
     }
 });
@@ -20,10 +18,20 @@ document.querySelectorAll('input[name="ekskul"]').forEach(cb => {
         const selected = document.querySelectorAll('input[name="ekskul"]:checked');
         if (selected.length > 3) {
             cb.checked = false;
-            alert('Maksimal 3 ekstrakurikuler tambahan boleh dipilih.');
+            showToast("⚠️ Maksimal 3 ekstrakurikuler boleh dipilih.");
         }
     });
 });
+
+// Fungsi toast
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.style.display = "block";
+    setTimeout(() => {
+        toast.style.display = "none";
+    }, 3000);
+}
 
 form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -51,7 +59,6 @@ form.addEventListener('submit', function (e) {
 
     notif.classList.add('hidden');
 
-    // Ganti dengan URL Web Apps Google Apps Script kamu
     const endpoint = "https://script.google.com/macros/s/AKfycbzD8jWYWEeVh8IJT-Kh4p2UAl9tleScRwr2gA5lXtQWj4sF-1509LjkGarYJImyt1Tkqw/exec";
 
     fetch(endpoint, {
@@ -68,18 +75,18 @@ form.addEventListener('submit', function (e) {
             peminatan: checkedEkskul.includes("IT Developer Club") ? peminatan : ""
         })
     })
-        .then(res => res.json())
-        .then(res => {
-            if (res.status === "success") {
-                alert("✅ Data berhasil dikirim ke Google Sheet!");
-                form.reset();
-                peminatanGroup.style.display = "none"; // Sembunyikan lagi
-            } else {
-                alert("❌ Gagal mengirim data.");
-            }
-        })
-        .catch(err => {
-            console.error(err);
-            alert("❌ Terjadi kesalahan saat mengirim data.");
-        });
+    .then(res => res.json())
+    .then(res => {
+        if (res.status === "success") {
+            showToast("✅ Pendaftaran berhasil dikirim!");
+            form.reset();
+            peminatanGroup.style.display = "none";
+        } else {
+            showToast("❌ Gagal mengirim data.");
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        showToast("❌ Terjadi kesalahan saat mengirim data.");
+    });
 });
