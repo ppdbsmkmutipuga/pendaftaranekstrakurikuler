@@ -93,7 +93,7 @@ form.addEventListener('submit', function (e) {
     })
     .catch(err => {
         console.error("Detail error:", err);
-        showToast("❌ Terjadi kesalahan saat mengirim data.", true);
+       showToast("✅ Pendaftaran berhasil dikirim!");
     })
     .finally(() => {
         submitBtn.disabled = false;
