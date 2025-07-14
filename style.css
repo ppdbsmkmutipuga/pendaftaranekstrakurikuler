@@ -20,15 +20,14 @@ body {
     width: 100%;
     border-radius: 16px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    animation: fadeIn 0.5s ease;
+    animation: fadeInUp 0.5s ease;
 }
 
-@keyframes fadeIn {
+@keyframes fadeInUp {
     from {
         opacity: 0;
         transform: translateY(30px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -168,49 +167,6 @@ button:hover {
     color: #333;
 }
 
-/* ==== RESPONSIVE LAYOUT ==== */
-@media (max-width: 768px) {
-    .card {
-        padding: 24px 20px;
-        margin: 16px;
-        border-radius: 12px;
-    }
-
-    h2 {
-        font-size: 20px;
-        margin-bottom: 20px;
-    }
-
-    .form-group label {
-        font-size: 14px;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        padding: 12px;
-        font-size: 14px;
-    }
-
-    .title {
-        font-size: 14px;
-    }
-
-    .desc {
-        font-size: 12px;
-    }
-
-    button {
-        padding: 12px;
-        font-size: 15px;
-    }
-
-    .notif {
-        font-size: 13px;
-        padding: 8px;
-    }
-}
-
 .label-text small {
     display: block;
     color: #555;
@@ -218,6 +174,7 @@ button:hover {
     margin-top: 4px;
 }
 
+/* PROMO MUTIPUGA */
 .promo-mutipuga {
     background: linear-gradient(135deg, #2193b0, #6dd5ed);
     color: white;
@@ -227,7 +184,18 @@ button:hover {
     margin-bottom: 30px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     font-family: 'Roboto', sans-serif;
-    animation: fadeIn 1s ease-in-out;
+    animation: fadeInDown 1s ease-in-out;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .logo-container {
@@ -268,7 +236,7 @@ button:hover {
     margin: 0 2px;
 }
 
-.promo-mutipuga .desc {
+.promo-mutipuga .promo-desc {
     font-size: 0.95rem;
     line-height: 1.6;
     margin: 10px 0;
@@ -280,21 +248,48 @@ button:hover {
     color: #e0f7f1;
 }
 
-/* Animasi */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* RESPONSIF TABLET DAN HP */
+/* MEDIA QUERY: RESPONSIF */
 @media (max-width: 768px) {
+    .card {
+        padding: 24px 20px;
+        margin: 16px;
+        border-radius: 12px;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .title {
+        font-size: 14px;
+    }
+
+    .desc {
+        font-size: 12px;
+    }
+
+    button {
+        padding: 12px;
+        font-size: 15px;
+    }
+
+    .notif {
+        font-size: 13px;
+        padding: 8px;
+    }
+
     .promo-mutipuga {
         padding: 20px 15px;
     }
@@ -307,7 +302,7 @@ button:hover {
         font-size: 1rem;
     }
 
-    .promo-mutipuga .desc {
+    .promo-mutipuga .promo-desc {
         font-size: 0.9rem;
     }
 
@@ -329,13 +324,10 @@ button:hover {
         font-size: 0.95rem;
     }
 
-    .promo-mutipuga .desc {
+    .promo-mutipuga .promo-desc {
         font-size: 0.85rem;
     }
-}
 
-
-@media (max-width: 480px) {
     .ekskul-grid {
         grid-template-columns: 1fr;
     }
