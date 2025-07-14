@@ -73,34 +73,35 @@ document.addEventListener('DOMContentLoaded', () => {
     submitBtn.disabled = true;
     submitBtn.textContent = "Mengirim...";
 
-    fetch(endpoint, {
-      method: "POST",
-      body: formData
-    })
-    .then(async res => {
-      const text = await res.text();
-      try {
-        const json = JSON.parse(text);
-        if (json.status === "success") {
-          showToast("✅ Pendaftaran berhasil dikirim!");
-          form.reset();
-          peminatanGroup.style.display = "none";
-        } else {
-          showToast("❌ Gagal mengirim data.", true);
-        }
-      } catch (err) {
-        showToast("✅ Pendaftaran berhasil dikirim!");
-        form.reset();
-        peminatanGroup.style.display = "none";
-      }
-    })
-    .catch(err => {
-      console.error("Detail error:", err);
-      showToast("❌ Terjadi kesalahan jaringan.", true);
-    })
-    .finally(() => {
-      submitBtn.disabled = false;
-      submitBtn.textContent = "Kirim Pendaftaran";
-    });
-  });
+   fetch(endpoint, {
+  method: "POST",
+  body: formData
+})
+.then(async res => {
+  const text = await res.text(); // Ambil respons sebagai teks
+  let isSuccess = false;
+
+  try {
+    const json = JSON.parse(text); // Coba parse ke JSON
+    isSuccess = json.status === "success";
+  } catch (e) {
+    // Fallback: respons bukan JSON, tapi bisa dianggap sukses jika status 200 dan mengandung kata "success"
+    isSuccess = res.ok && text.toLowerCase().includes("success");
+  }
+
+  if (isSuccess) {
+    showToast("✅ Pendaftaran berhasil dikirim!");
+    form.reset();
+    peminatanGroup.style.display = "none";
+  } else {
+    showToast("❌ Gagal mengirim data.", true);
+  }
+})
+.catch(err => {
+  console.error("Detail error:", err);
+  showToast("❌ Terjadi kesalahan jaringan.", true);
+})
+.finally(() => {
+  submitBtn.disabled = false;
+  submitBtn.textContent = "Kirim Pendaftaran";
 });
