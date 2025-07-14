@@ -248,3 +248,32 @@ button:hover {
     font-size: 14px;
   }
 }
+.ekskul-card {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px 16px;
+  background: #f0f4ff;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.ekskul-card:hover {
+  border-color: #667eea;
+  background-color: #e5edff;
+}
+
+.ekskul-card input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 4px;
+  cursor: pointer;
+}
+
+.check-content {
+  cursor: pointer;
+  user-select: none;
+}
+
