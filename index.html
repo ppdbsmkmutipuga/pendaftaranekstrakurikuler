@@ -32,147 +32,141 @@
                 <label for="whatsapp">Nomor WhatsApp</label>
                 <input type="tel" id="whatsapp" name="whatsapp" placeholder="Contoh: 08xxxxxxxxxx" required />
             </div>
-            <div class="form-group">
-                <label for="ekskul" class="form-label">Ekstrakurikuler</label>
 
+            <div class="form-group">
+                <label for="ekskul">Ekstrakurikuler</label>
                 <div class="ekskul-wajib">
-                    <p class="section-title">Ekstrakurikuler Wajib</p>
-
-                    <div class="ekskul-card">
-                        <h4>Hizbul Wathan (HW)</h4>
-                        <p>Organisasi kepanduan Muhammadiyah yang membentuk karakter disiplin, kepemimpinan, dan cinta
-                            tanah air melalui kegiatan alam dan sosial.</p>
-                    </div>
-
-                    <div class="ekskul-card">
-                        <h4>Tapak Suci</h4>
-                        <p>Ekstrakurikuler pencak silat resmi Muhammadiyah yang melatih fisik, mental, dan spiritual
-                            dengan menjunjung tinggi nilai-nilai keislaman.</p>
-                    </div>
-
-                    <div class="ekskul-card">
-                        <h4>Bela Negara</h4>
-                        <p>Kegiatan yang membangun semangat nasionalisme, kedisiplinan, dan tanggung jawab sebagai
-                            generasi penerus bangsa.</p>
+                    <p><strong>Ekstrakurikuler Wajib:</strong></p>
+                    <div class="ekskul-list">
+                        <label class="ekskul-item">
+                            <input type="checkbox" checked disabled />
+                            <span class="checkmark"></span>
+                            <span class="label-text">Hizbul Wathan (HW)</span>
+                        </label>
+                        <label class="ekskul-item">
+                            <input type="checkbox" checked disabled />
+                            <span class="checkmark"></span>
+                            <span class="label-text">Tapak Suci</span>
+                        </label>
                     </div>
                 </div>
-            </div>
-            <div class="ekskul-pilihan">
-                <p><strong>Pilih Maksimal 3 Ekstrakurikuler Tambahan:</strong></p>
-                <div class="ekskul-grid">
 
-                    <!-- IT Developer Club -->
-                    <label class="ekskul-card">
-                        <input type="checkbox" name="ekskul" value="IT Developer Club">
-                        <div class="check-content">
-                            <div class="title">IT Developer Club</div>
-                            <div class="desc">Coding, Desain Grafis, dan 3D Animasi</div>
-                        </div>
-                    </label>
+                <div class="ekskul-pilihan">
+                    <p><strong>Pilih Maksimal 3 Ekstrakurikuler Tambahan:</strong></p>
+                    <div class="ekskul-grid">
 
-                    <!-- TSM -->
-                    <label class="ekskul-card">
-                        <input type="checkbox" name="ekskul" value="Teknik Sepeda Motor">
-                        <div class="check-content">
-                            <div class="title">Teknik Sepeda Motor</div>
-                            <div class="desc">Bongkar pasang mesin & perawatan motor</div>
-                        </div>
-                    </label>
+                        <!-- IT Developer Club -->
+                        <label class="ekskul-card">
+                            <input type="checkbox" name="ekskul" value="IT Developer Club">
+                            <div class="check-content">
+                                <div class="title">IT Developer Club</div>
+                                <div class="desc">Coding, Desain Grafis, dan 3D Animasi</div>
+                            </div>
+                        </label>
 
-                    <!-- Badminton -->
-                    <label class="ekskul-card">
-                        <input type="checkbox" name="ekskul" value="Badminton">
-                        <div class="check-content">
-                            <div class="title">Badminton</div>
-                            <div class="desc">Latihan teknik dasar & turnamen</div>
-                        </div>
-                    </label>
+                        <!-- TSM -->
+                        <label class="ekskul-card">
+                            <input type="checkbox" name="ekskul" value="Teknik Sepeda Motor">
+                            <div class="check-content">
+                                <div class="title">Teknik Sepeda Motor</div>
+                                <div class="desc">Bongkar pasang mesin & perawatan motor</div>
+                            </div>
+                        </label>
 
-                    <!-- Tilawah -->
-                    <label class="ekskul-card">
-                        <input type="checkbox" name="ekskul" value="Tilawatil Qur'an">
-                        <div class="check-content">
-                            <div class="title">Tilawatil Qur'an</div>
-                            <div class="desc">Membaca Al-Qur’an dengan tartil & merdu</div>
-                        </div>
-                    </label>
+                        <!-- Badminton -->
+                        <label class="ekskul-card">
+                            <input type="checkbox" name="ekskul" value="Badminton">
+                            <div class="check-content">
+                                <div class="title">Badminton</div>
+                                <div class="desc">Latihan teknik dasar & turnamen</div>
+                            </div>
+                        </label>
 
-                    <!-- Futsal -->
-                    <label class="ekskul-card">
-                        <input type="checkbox" name="ekskul" value="Futsal">
-                        <div class="check-content">
-                            <div class="title">Futsal</div>
-                            <div class="desc">Olahraga tim, fisik dan strategi lapangan</div>
-                        </div>
-                    </label>
+                        <!-- Tilawah -->
+                        <label class="ekskul-card">
+                            <input type="checkbox" name="ekskul" value="Tilawatil Qur'an">
+                            <div class="check-content">
+                                <div class="title">Tilawatil Qur'an</div>
+                                <div class="desc">Membaca Al-Qur’an dengan tartil & merdu</div>
+                            </div>
+                        </label>
 
-                    <!-- Public Speaking -->
-                    <label class="ekskul-card">
-                        <input type="checkbox" name="ekskul" value="Public Speaking">
-                        <div class="check-content">
-                            <div class="title">Public Speaking</div>
-                            <div class="desc">Latihan MC Jawa, pidato & komunikasi</div>
-                        </div>
-                    </label>
+                        <!-- Futsal -->
+                        <label class="ekskul-card">
+                            <input type="checkbox" name="ekskul" value="Futsal">
+                            <div class="check-content">
+                                <div class="title">Futsal</div>
+                                <div class="desc">Olahraga tim, fisik dan strategi lapangan</div>
+                            </div>
+                        </label>
 
-                    <!-- English Club -->
-                    <label class="ekskul-card">
-                        <input type="checkbox" name="ekskul" value="English Club">
-                        <div class="check-content">
-                            <div class="title">English Club</div>
-                            <div class="desc">Speaking, games, dan percakapan sehari-hari</div>
-                        </div>
-                    </label>
+                        <!-- Public Speaking -->
+                        <label class="ekskul-card">
+                            <input type="checkbox" name="ekskul" value="Public Speaking">
+                            <div class="check-content">
+                                <div class="title">Public Speaking</div>
+                                <div class="desc">Latihan MC Jawa, pidato & komunikasi</div>
+                            </div>
+                        </label>
 
-                    <!-- Sinematografi -->
-                    <label class="ekskul-card">
-                        <input type="checkbox" name="ekskul" value="Sinematografi">
-                        <div class="check-content">
-                            <div class="title">Sinematografi</div>
-                            <div class="desc">Bikin film pendek, shooting & editing</div>
-                        </div>
-                    </label>
+                        <!-- English Club -->
+                        <label class="ekskul-card">
+                            <input type="checkbox" name="ekskul" value="English Club">
+                            <div class="check-content">
+                                <div class="title">English Club</div>
+                                <div class="desc">Speaking, games, dan percakapan sehari-hari</div>
+                            </div>
+                        </label>
 
-                    <!-- Musik -->
-                    <label class="ekskul-card">
-                        <input type="checkbox" name="ekskul" value="Musik">
-                        <div class="check-content">
-                            <div class="title">Musik</div>
-                            <div class="desc">Latihan alat musik & tampil di acara sekolah</div>
-                        </div>
-                    </label>
+                        <!-- Sinematografi -->
+                        <label class="ekskul-card">
+                            <input type="checkbox" name="ekskul" value="Sinematografi">
+                            <div class="check-content">
+                                <div class="title">Sinematografi</div>
+                                <div class="desc">Bikin film pendek, shooting & editing</div>
+                            </div>
+                        </label>
+
+                        <!-- Musik -->
+                        <label class="ekskul-card">
+                            <input type="checkbox" name="ekskul" value="Musik">
+                            <div class="check-content">
+                                <div class="title">Musik</div>
+                                <div class="desc">Latihan alat musik & tampil di acara sekolah</div>
+                            </div>
+                        </label>
+
+                    </div>
+                    <small style="color: #555; font-size: 13px;">Pilih maksimal 3 kegiatan ekstrakurikuler
+                        tambahan.</small>
+                    <div class="form-group" id="peminatan-group" style="display: none;">
+                        <label for="peminatan">Peminatan di IT Developer Club</label>
+                        <select id="peminatan" name="peminatan">
+                            <option value="">-- Pilih Peminatan --</option>
+                            <option value="Desain Grafis">Desain Grafis</option>
+                            <option value="3D Animasi">3D Animasi</option>
+                            <option value="Pemrograman Website">Pemrograman Website</option>
+                            <option value="Pemrograman Android">Pemrograman Android</option>
+                            <option value="Pemrograman Game">Pemrograman Game</option>
+                        </select>
+                    </div>
 
                 </div>
-                <small style="color: #555; font-size: 13px;">Pilih maksimal 3 kegiatan ekstrakurikuler
-                    tambahan.</small>
-                <div class="form-group" id="peminatan-group" style="display: none;">
-                    <label for="peminatan">Peminatan di IT Developer Club</label>
-                    <select id="peminatan" name="peminatan">
-                        <option value="">-- Pilih Peminatan --</option>
-                        <option value="Desain Grafis">Desain Grafis</option>
-                        <option value="3D Animasi">3D Animasi</option>
-                        <option value="Pemrograman Website">Pemrograman Website</option>
-                        <option value="Pemrograman Android">Pemrograman Android</option>
-                        <option value="Pemrograman Game">Pemrograman Game</option>
-                    </select>
+
+
+
+                <div class="form-group">
+                    <label for="alasan">Alasan Memilih Ekstrakurikuler</label>
+                    <textarea id="alasan" name="alasan" placeholder="Tulis alasanmu di sini..." required></textarea>
                 </div>
 
-            </div>
+                <!-- Notifikasi error -->
+                <div id="notif" class="hidden" style="color: red; margin-top: 10px;"></div>
 
-
-
-            <div class="form-group">
-                <label for="alasan">Alasan Memilih Ekstrakurikuler</label>
-                <textarea id="alasan" name="alasan" placeholder="Tulis alasanmu di sini..." required></textarea>
-            </div>
-
-            <!-- Notifikasi error -->
-            <div id="notif" class="hidden" style="color: red; margin-top: 10px;"></div>
-
-            <!-- Tombol Kirim -->
-            <div class="form-group">
-                <button type="submit" id="submitBtn">Kirim Pendaftaran</button>
-            </div>
+                <!-- Tombol Kirim -->
+                <div class="form-group">
+                    <button type="submit" id="submitBtn">Kirim Pendaftaran</button>
+                </div>
         </form>
     </div>
 
