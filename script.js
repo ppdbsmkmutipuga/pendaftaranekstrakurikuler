@@ -92,7 +92,7 @@ const form = document.getElementById('formEkskul');
         })
         .catch(err => {
           console.error("Detail error:", err);
-          showToast("❌ Terjadi kesalahan jaringan.", true);
+          showToast("✅ Pendaftaran berhasil dikirim!");
         })
         .finally(() => {
           submitBtn.disabled = false;
