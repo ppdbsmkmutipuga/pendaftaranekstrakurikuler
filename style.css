@@ -211,6 +211,14 @@ button:hover {
     }
 }
 
+.label-text small {
+    display: block;
+    color: #555;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+
 @media (max-width: 480px) {
     .ekskul-grid {
         grid-template-columns: 1fr;
@@ -233,47 +241,3 @@ button:hover {
         overflow-y: auto;
     }
 }
-@media (max-width: 480px) {
-  input[type="checkbox"] {
-    width: 24px;
-    height: 24px;
-  }
-
-  .ekskul-card {
-    padding: 10px;
-    gap: 6px;
-  }
-
-  .check-content {
-    font-size: 14px;
-  }
-}
-.ekskul-card {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  padding: 12px 16px;
-  background: #f0f4ff;
-  border-radius: 10px;
-  border: 2px solid transparent;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-.ekskul-card:hover {
-  border-color: #667eea;
-  background-color: #e5edff;
-}
-
-.ekskul-card input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  margin-top: 4px;
-  cursor: pointer;
-}
-
-.check-content {
-  cursor: pointer;
-  user-select: none;
-}
-
