@@ -3,7 +3,6 @@ const notif = document.getElementById('notif');
 const itDevCheckbox = document.querySelector('input[value="IT Developer Club"]');
 const peminatanGroup = document.getElementById('peminatan-group');
 const peminatanSelect = document.getElementById('peminatan');
-const saranEkskul = document.getElementById('saranEkskul').value.trim();
 const submitBtn = document.getElementById('submitBtn');
 
 itDevCheckbox.addEventListener('change', () => {
@@ -40,15 +39,32 @@ form.addEventListener('submit', function (e) {
     const kelas = document.getElementById('kelas').value;
     const whatsapp = document.getElementById('whatsapp').value.trim();
     const alasan = document.getElementById('alasan').value.trim();
+    const saranEkskul = document.getElementById('saranEkskul').value.trim();
     const checkedEkskul = Array.from(document.querySelectorAll('input[name="ekskul"]:checked')).map(el => el.value);
     const peminatan = peminatanSelect.value;
 
+    // Validasi WhatsApp
+    if (!/^(08|\+628)[0-9]{7,13}$/.test(whatsapp)) {
+        notif.textContent = "⚠️ Masukkan nomor WhatsApp yang valid, hanya angka dan awalan 08 atau +62.";
+        notif.classList.remove('hidden');
+        return;
+    }
+
+    // Validasi Nama
+    if (!/^[A-Za-zÀ-ÿ\s']{3,50}$/.test(nama)) {
+        notif.textContent = "⚠️ Nama hanya boleh huruf, spasi, dan tanda petik.";
+        notif.classList.remove('hidden');
+        return;
+    }
+
+    // Validasi Jumlah Ekstrakurikuler
     if (checkedEkskul.length === 0 || checkedEkskul.length > 3) {
         notif.textContent = "⚠️ Pilih minimal 1 dan maksimal 3 ekstrakurikuler tambahan.";
         notif.classList.remove('hidden');
         return;
     }
 
+    // Validasi Peminatan jika pilih IT Dev
     if (checkedEkskul.includes("IT Developer Club") && peminatan === "") {
         notif.textContent = "⚠️ Pilih peminatan di IT Developer Club.";
         notif.classList.remove('hidden');
@@ -101,13 +117,3 @@ form.addEventListener('submit', function (e) {
             submitBtn.textContent = "Kirim Pendaftaran";
         });
 });
-if (!/^(08|\+628)\d{7,13}$/.test(whatsapp)) {
-    notif.textContent = "⚠️ Masukkan nomor WhatsApp yang valid, hanya angka dan awalan 08 atau +62.";
-    notif.classList.remove('hidden');
-    return;
-}
-if (!/^[A-Za-zÀ-ÿ\s']{3,50}$/.test(nama)) {
-    notif.textContent = "⚠️ Nama hanya boleh huruf, spasi, dan tanda petik.";
-    notif.classList.remove('hidden');
-    return;
-}
