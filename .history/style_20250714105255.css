@@ -1,0 +1,193 @@
+  /* === RESET & GLOBAL === */
+  * {
+      box-sizing: border-box;
+  }
+
+  body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+  }
+
+  /* === CARD === */
+  .card {
+      background: #fff;
+      padding: 40px;
+      max-width: 700px;
+      width: 90%;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      animation: fadeIn 0.6s ease;
+  }
+
+  @keyframes fadeIn {
+      from {
+          opacity: 0;
+          transform: translateY(30px);
+      }
+
+      to {
+          opacity: 1;
+          transform: translateY(0);
+      }
+  }
+
+  h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 24px;
+  }
+
+  /* === FORM === */
+  .form-group {
+      margin-bottom: 20px;
+  }
+
+  .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 500;
+  }
+
+  input[type="text"],
+  input[type="tel"],
+  textarea {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      background: #f9f9f9;
+      transition: 0.3s;
+  }
+
+  input:focus,
+  textarea:focus {
+      outline: none;
+      background: #fff;
+      border-color: #667eea;
+  }
+
+  textarea {
+      resize: vertical;
+      min-height: 80px;
+  }
+
+  /* === BUTTON === */
+  button {
+      width: 100%;
+      padding: 14px;
+      background-color: #667eea;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+  }
+
+  button:hover {
+      background-color: #5a67d8;
+      transform: scale(1.02);
+  }
+
+  /* === EKSUL WAJIB === */
+  .ekskul-wajib {
+      margin-top: 20px;
+  }
+
+  .ekskul-wajib-title {
+      font-weight: bold;
+      font-size: 16px;
+      color: #1e293b;
+      margin-bottom: 12px;
+  }
+
+  .ekskul-wajib-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+  }
+
+  .ekskul-wajib-card {
+      background: #f0f4ff;
+      padding: 12px 16px;
+      border-left: 4px solid #667eea;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      transition: 0.3s;
+  }
+
+  .ekskul-wajib-card:hover {
+      background: #e5edff;
+  }
+
+  .ekskul-wajib-card .title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #334155;
+  }
+
+  .ekskul-wajib-card .desc {
+      font-size: 13px;
+      color: #475569;
+      line-height: 1.4;
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+      .card {
+          padding: 24px 20px;
+          margin: 16px;
+          border-radius: 12px;
+      }
+
+      h2 {
+          font-size: 20px;
+          margin-bottom: 20px;
+      }
+
+      .form-group label {
+          font-size: 14px;
+      }
+
+      input,
+      textarea {
+          padding: 12px;
+          font-size: 14px;
+      }
+
+      button {
+          padding: 12px;
+          font-size: 15px;
+      }
+  }
+
+  @media (max-width: 480px) {
+      .ekskul-wajib-grid {
+          gap: 10px;
+      }
+
+      .ekskul-wajib-card .title {
+          font-size: 14px;
+      }
+
+      .ekskul-wajib-card .desc {
+          font-size: 12.5px;
+      }
+  }
+
+  @media screen and (orientation: landscape) and (max-width: 768px) {
+      .card {
+          max-height: 95vh;
+          overflow-y: auto;
+      }
+  }

@@ -3,7 +3,6 @@ const notif = document.getElementById('notif');
 const itDevCheckbox = document.querySelector('input[value="IT Developer Club"]');
 const peminatanGroup = document.getElementById('peminatan-group');
 const peminatanSelect = document.getElementById('peminatan');
-const saranEkskul = document.getElementById('saranEkskul').value.trim();
 const submitBtn = document.getElementById('submitBtn');
 
 itDevCheckbox.addEventListener('change', () => {
@@ -66,7 +65,6 @@ form.addEventListener('submit', function (e) {
     formData.append("alasan", alasan);
     formData.append("ekskul", checkedEkskul.join(", "));
     formData.append("peminatan", checkedEkskul.includes("IT Developer Club") ? peminatan : "");
-    formData.append("saranEkskul", saranEkskul);
 
     submitBtn.disabled = true;
     submitBtn.textContent = "Mengirim...";

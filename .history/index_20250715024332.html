@@ -11,22 +11,6 @@
 
 <body>
     <div class="card">
-        <!-- Banner Promosi SMK Mutipuga -->
-        <section class="promo-mutipuga">
-            <div class="promo-content">
-                <div class="logo-container">
-                    <img src="images/logo.png" alt="Logo SMK Mutipuga" class="logo-mutipuga" />
-                </div>
-                <h1>SMK MUTIPUGA</h1>
-                <p class="slogan">Sekolah Digital Kreatif Terbaik di <strong>Kabupaten Demak</strong></p>
-                <p class="highlight">Berbasis <span>Desain</span> dan <span>Teknologi</span> dengan nilai-nilai
-                    <strong>Islam</strong>
-                </p>
-                <p class="desc">Ayo bergabung di SMK Mutipuga! Raih masa depanmu dengan pembelajaran berbasis industri,
-                    ekskul unggulan, dan pembinaan karakter Islami.</p>
-                <p class="hashtag">#SMKMutipugaKreatif #SekolahDigitalDemak #SMKHebat</p>
-            </div>
-        </section>
         <h2>Form Pendaftaran Ekstrakurikuler</h2>
         <form id="formEkskul" action="#" method="POST">
             <div class="form-group">
@@ -42,12 +26,10 @@
                 <label for="kelas">Kelas</label>
                 <select id="kelas" name="kelas" required>
                     <option value="">-- Pilih Kelas --</option>
-                    <option value="IX">VII (7 SMP)</option>
-                    <option value="IX">VIII (8 SMP)</option>
-                    <option value="IX">IX (9 SMP)</option>
-                    <option value="X">X (10 SMK)</option>
-                    <option value="XI">XI (11 SMK)</option>
-                    <option value="XII">XII (12 SMK)</option>
+                    <option value="IX">IX (SMP)</option>
+                    <option value="X">X (SMK)</option>
+                    <option value="XI">XI (SMK)</option>
+                    <option value="XII">XII (SMK)</option>
                 </select>
             </div>
 
@@ -209,24 +191,19 @@
                 </div>
                 <div class="form-group">
                     <label for="saranEkskul">Saran Ekstrakurikuler Tambahan</label>
-                    <input type="text" id="saranEkskul" name="saranEkskul" placeholder="Contoh: Tari,PMR,Pranatacara" />
+                    <input type="text" id="saranEkskul" name="saranEkskul"
+                        placeholder="Contoh: Tari,PMR,Pranatacar" />
                     <small style="color: #555;">
-                        Punya usulan ekskul lain? Tulis di sini. Jika banyak peminat, akan dibuka di periode berikutnya.
-                        Jika belum cukup, akan dipertimbangkan di lain waktu.
+                        Tulis jika kamu memiliki usulan ekskul lain. Jika banyak peminat, akan dipertimbangkan untuk
+                        dibuka.
                     </small>
-
                 </div>
 
 
                 <div class="form-group">
                     <label for="alasan">Alasan Memilih Ekstrakurikuler</label>
-                    <textarea id="alasan" name="alasan" placeholder="Tulis alasanmu di sini..." required minlength="10"
-                        oninput="this.setCustomValidity(this.value.trim().length < 10 ? 'Minimal 10 karakter dan tidak boleh hanya spasi.' : '')"
-                        oninvalid="this.setCustomValidity('Bagian ini wajib diisi, minimal 10 karakter.')"></textarea>
-                    <small style="color: #555;">Wajib diisi, minimal 10 karakter. Harap tulis alasan dengan
-                        jelas.</small>
+                    <textarea id="alasan" name="alasan" placeholder="Tulis alasanmu di sini..." required></textarea>
                 </div>
-
 
                 <!-- Notifikasi error -->
                 <div id="notif" class="hidden" style="color: red; margin-top: 10px;"></div>
@@ -235,19 +212,6 @@
                 <div class="form-group">
                     <button type="submit" id="submitBtn">Kirim Pendaftaran</button>
                 </div>
-                <!-- Informasi Tambahan -->
-                <div class="form-group" style="text-align: left; margin-top: 20px;">
-                    <p style="font-size: 14px; color: #333; margin-bottom: 8px;">
-                        📅 <strong>Catatan:</strong> Jadwal latihan akan diinformasikan langsung oleh masing-masing
-                        <strong>pelatih</strong> atau <strong>guru pembimbing</strong>.
-                    </p>
-                    <p style="font-size: 14px; color: #333;">
-                        📱 <strong>Pastikan nomor WhatsApp yang dicantumkan aktif dan terhubung</strong>, karena kamu
-                        akan dimasukkan ke dalam <strong>grup ekstrakurikuler</strong>.
-                    </p>
-                </div>
-
-
         </form>
     </div>
 

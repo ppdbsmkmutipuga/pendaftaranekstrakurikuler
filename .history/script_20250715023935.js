@@ -66,7 +66,6 @@ form.addEventListener('submit', function (e) {
     formData.append("alasan", alasan);
     formData.append("ekskul", checkedEkskul.join(", "));
     formData.append("peminatan", checkedEkskul.includes("IT Developer Club") ? peminatan : "");
-    formData.append("saranEkskul", saranEkskul);
 
     submitBtn.disabled = true;
     submitBtn.textContent = "Mengirim...";

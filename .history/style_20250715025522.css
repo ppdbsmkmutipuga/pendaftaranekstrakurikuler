@@ -238,7 +238,7 @@ button:hover {
     height: 70px;
     max-width: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
 .promo-mutipuga h1 {

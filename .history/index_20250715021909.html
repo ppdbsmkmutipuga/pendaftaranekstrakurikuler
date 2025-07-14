@@ -11,52 +11,27 @@
 
 <body>
     <div class="card">
-        <!-- Banner Promosi SMK Mutipuga -->
-        <section class="promo-mutipuga">
-            <div class="promo-content">
-                <div class="logo-container">
-                    <img src="images/logo.png" alt="Logo SMK Mutipuga" class="logo-mutipuga" />
-                </div>
-                <h1>SMK MUTIPUGA</h1>
-                <p class="slogan">Sekolah Digital Kreatif Terbaik di <strong>Kabupaten Demak</strong></p>
-                <p class="highlight">Berbasis <span>Desain</span> dan <span>Teknologi</span> dengan nilai-nilai
-                    <strong>Islam</strong>
-                </p>
-                <p class="desc">Ayo bergabung di SMK Mutipuga! Raih masa depanmu dengan pembelajaran berbasis industri,
-                    ekskul unggulan, dan pembinaan karakter Islami.</p>
-                <p class="hashtag">#SMKMutipugaKreatif #SekolahDigitalDemak #SMKHebat</p>
-            </div>
-        </section>
         <h2>Form Pendaftaran Ekstrakurikuler</h2>
         <form id="formEkskul" action="#" method="POST">
             <div class="form-group">
                 <label for="nama">Nama Lengkap</label>
-                <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" required
-                    pattern="^[A-Za-zÀ-ÿ\s']{3,50}$"
-                    oninput="this.value = this.value.replace(/[^A-Za-zÀ-ÿ\s']/g, '')" />
-                <small style="color: #555;">Hanya huruf, spasi, dan tanda petik (contoh: D'Alam).</small>
+                <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" required />
             </div>
-
 
             <div class="form-group">
                 <label for="kelas">Kelas</label>
                 <select id="kelas" name="kelas" required>
                     <option value="">-- Pilih Kelas --</option>
-                    <option value="IX">VII (7 SMP)</option>
-                    <option value="IX">VIII (8 SMP)</option>
-                    <option value="IX">IX (9 SMP)</option>
-                    <option value="X">X (10 SMK)</option>
-                    <option value="XI">XI (11 SMK)</option>
-                    <option value="XII">XII (12 SMK)</option>
+                    <option value="IX">IX (SMP)</option>
+                    <option value="X">X (SMK)</option>
+                    <option value="XI">XI (SMK)</option>
+                    <option value="XII">XII (SMK)</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="whatsapp">Nomor WhatsApp</label>
-                <input type="text" id="whatsapp" name="whatsapp" placeholder="Contoh: 08xxxxxxxxxx" required
-                    pattern="^(08|\+628)[0-9]{7,13}$" inputmode="numeric"
-                    oninput="this.value = this.value.replace(/[^0-9+]/g, '')" />
-                <small style="color: #555;">Hanya angka, boleh diawali +62 atau 08</small>
+                <input type="tel" id="whatsapp" name="whatsapp" placeholder="Contoh: 08xxxxxxxxxx" required />
             </div>
 
             <div class="form-group">
@@ -70,8 +45,7 @@
                                 <span class="checkmark"></span>
                                 <span class="label-text">
                                     <strong>Hizbul Wathan (HW)</strong><br>
-                                    <small><b>Pelatih: Mas Musa</b><br>Pramuka Muhammadiyah yang membentuk karakter
-                                        Islami dan
+                                    <small>Pelatih: Mas Musa<br>Pramuka Muhammadiyah yang membentuk karakter Islami dan
                                         mandiri.</small>
                                 </span>
                             </label>
@@ -82,8 +56,7 @@
                                 <span class="checkmark"></span>
                                 <span class="label-text">
                                     <strong>Tapak Suci</strong><br>
-                                    <small><b>Pelatih: Pak Sobirin</b><br>Beladiri silat khas Muhammadiyah untuk melatih
-                                        fisik
+                                    <small>Pelatih: Pak Sobirin<br>Beladiri silat khas Muhammadiyah untuk melatih fisik
                                         dan mental.</small>
                                 </span>
                             </label>
@@ -94,8 +67,7 @@
                                 <span class="checkmark"></span>
                                 <span class="label-text">
                                     <strong>Bela Negara</strong><br>
-                                    <small><b>Pelatih: Menwa Unimus</b><br>Pembinaan kedisiplinan dan cinta tanah air
-                                        melalui
+                                    <small>Pelatih: Menwa Unimus<br>Pembinaan kedisiplinan dan cinta tanah air melalui
                                         kegiatan semi-militer.</small>
                                 </span>
                             </label>
@@ -119,7 +91,7 @@
                                     Cocok untuk yang ingin berkarier di dunia digital kreatif maupun menjadi developer
                                     profesional.
                                 </div>
-                                <small><b>Pelatih: Pak Nanda Adisaputra</b></small>
+                                <small>Pelatih: Pak Nanda Adisaputra</small>
                             </label>
                         </div>
 
@@ -136,7 +108,7 @@
                                     Cocok bagi siswa yang ingin menjadi mekanik profesional atau wirausaha bengkel
                                     motor.
                                 </div>
-                                <small><b>Pelatih: Pak Karmani</b></small>
+                                <small>Pelatih: Pak Karmani</small>
                             </label>
                         </div>
 
@@ -152,7 +124,7 @@
                                     seperti passing, dribbling, dan shooting,
                                     serta disiplin dan sportivitas dalam pertandingan.
                                 </div>
-                                <small><b>Pelatih: Pak Sobirin</b></small>
+                                <small>Pelatih: Pak Sobirin</small>
                             </label>
                         </div>
 
@@ -168,7 +140,7 @@
                                     Materi meliputi MC, pidato, improvisasi, dan komunikasi formal maupun informal untuk
                                     membangun rasa percaya diri saat tampil di hadapan umum.
                                 </div>
-                                <small><b>Pelatih: Bu Via</b></small>
+                                <small><b></b></small>
                             </label>
                         </div>
 
@@ -207,26 +179,12 @@
                     </div>
 
                 </div>
-                <div class="form-group">
-                    <label for="saranEkskul">Saran Ekstrakurikuler Tambahan</label>
-                    <input type="text" id="saranEkskul" name="saranEkskul" placeholder="Contoh: Tari,PMR,Pranatacara" />
-                    <small style="color: #555;">
-                        Punya usulan ekskul lain? Tulis di sini. Jika banyak peminat, akan dibuka di periode berikutnya.
-                        Jika belum cukup, akan dipertimbangkan di lain waktu.
-                    </small>
-
-                </div>
 
 
                 <div class="form-group">
                     <label for="alasan">Alasan Memilih Ekstrakurikuler</label>
-                    <textarea id="alasan" name="alasan" placeholder="Tulis alasanmu di sini..." required minlength="10"
-                        oninput="this.setCustomValidity(this.value.trim().length < 10 ? 'Minimal 10 karakter dan tidak boleh hanya spasi.' : '')"
-                        oninvalid="this.setCustomValidity('Bagian ini wajib diisi, minimal 10 karakter.')"></textarea>
-                    <small style="color: #555;">Wajib diisi, minimal 10 karakter. Harap tulis alasan dengan
-                        jelas.</small>
+                    <textarea id="alasan" name="alasan" placeholder="Tulis alasanmu di sini..." required></textarea>
                 </div>
-
 
                 <!-- Notifikasi error -->
                 <div id="notif" class="hidden" style="color: red; margin-top: 10px;"></div>
@@ -235,19 +193,6 @@
                 <div class="form-group">
                     <button type="submit" id="submitBtn">Kirim Pendaftaran</button>
                 </div>
-                <!-- Informasi Tambahan -->
-                <div class="form-group" style="text-align: left; margin-top: 20px;">
-                    <p style="font-size: 14px; color: #333; margin-bottom: 8px;">
-                        📅 <strong>Catatan:</strong> Jadwal latihan akan diinformasikan langsung oleh masing-masing
-                        <strong>pelatih</strong> atau <strong>guru pembimbing</strong>.
-                    </p>
-                    <p style="font-size: 14px; color: #333;">
-                        📱 <strong>Pastikan nomor WhatsApp yang dicantumkan aktif dan terhubung</strong>, karena kamu
-                        akan dimasukkan ke dalam <strong>grup ekstrakurikuler</strong>.
-                    </p>
-                </div>
-
-
         </form>
     </div>
 
