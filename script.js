@@ -17,20 +17,11 @@ document.querySelectorAll('input[name="ekskul"]').forEach(cb => {
         const selected = document.querySelectorAll('input[name="ekskul"]:checked');
         if (selected.length > 3) {
             cb.checked = false;
-            showToast("⚠️ Maksimal 3 ekstrakurikuler boleh dipilih.");
+            notif.textContent = "⚠️ Maksimal 3 ekstrakurikuler boleh dipilih.";
+            notif.classList.remove('hidden');
         }
     });
 });
-
-function showToast(message, isError = false) {
-    const toast = document.getElementById("toast");
-    toast.textContent = message;
-    toast.style.backgroundColor = isError ? "#e53e3e" : "#48bb78";
-    toast.style.display = "block";
-    setTimeout(() => {
-        toast.style.display = "none";
-    }, 3000);
-}
 
 form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -96,24 +87,43 @@ form.addEventListener('submit', function (e) {
             try {
                 const json = JSON.parse(text);
                 if (json.status === "success") {
-                    showToast("✅ Pendaftaran berhasil dikirim!");
+                    tampilkanPesanSukses();
                     form.reset();
                     peminatanGroup.style.display = "none";
                 } else {
-                    showToast("❌ Gagal mengirim data.", true);
+                    notif.textContent = "❌ Gagal mengirim data.";
+                    notif.classList.remove('hidden');
                 }
             } catch (err) {
-                showToast("✅ Pendaftaran berhasil dikirim!");
+                tampilkanPesanSukses();
                 form.reset();
                 peminatanGroup.style.display = "none";
             }
         })
         .catch(err => {
             console.error("Detail error:", err);
-            showToast("❌ Terjadi kesalahan jaringan.", true);
+            notif.textContent = "❌ Terjadi kesalahan jaringan.";
+            notif.classList.remove('hidden');
         })
         .finally(() => {
             submitBtn.disabled = false;
             submitBtn.textContent = "Kirim Pendaftaran";
         });
 });
+
+function tampilkanPesanSukses() {
+    alert("✅ Pendaftaran berhasil dikirim!");
+
+    const existingNotif = document.getElementById("notif-berhasil");
+    if (existingNotif) existingNotif.remove();
+
+    const suksesNotif = document.createElement("p");
+    suksesNotif.textContent = "✅ Formulir berhasil dikirim!";
+    suksesNotif.id = "notif-berhasil";
+    suksesNotif.style.color = "green";
+    suksesNotif.style.fontWeight = "bold";
+    suksesNotif.style.marginTop = "20px";
+    suksesNotif.style.textAlign = "center";
+
+    form.parentNode.insertBefore(suksesNotif, form.nextSibling);
+}
