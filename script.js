@@ -66,21 +66,25 @@ form.addEventListener('submit', function (e) {
 
     const endpoint = "https://script.google.com/macros/s/AKfycbzD8jWYWEeVh8IJT-Kh4p2UAl9tleScRwr2gA5lXtQWj4sF-1509LjkGarYJImyt1Tkqw/exec";
 
-    const formData = new FormData();
-    formData.append("nama", nama);
-    formData.append("kelas", kelas);
-    formData.append("whatsapp", whatsapp);
-    formData.append("alasan", alasan);
-    formData.append("ekskul", checkedEkskul.join(", "));
-    formData.append("peminatan", checkedEkskul.includes("IT Developer Club") ? peminatan : "");
-    formData.append("saranEkskul", saranEkskul);
+    const payload = {
+        nama,
+        kelas,
+        whatsapp,
+        alasan,
+        ekskul: checkedEkskul.join(", "),
+        peminatan: checkedEkskul.includes("IT Developer Club") ? peminatan : "",
+        saranEkskul
+    };
 
     submitBtn.disabled = true;
     submitBtn.textContent = "Mengirim...";
 
     fetch(endpoint, {
         method: "POST",
-        body: formData
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
     })
         .then(async res => {
             const text = await res.text();
@@ -95,7 +99,7 @@ form.addEventListener('submit', function (e) {
                     notif.classList.remove('hidden');
                 }
             } catch (err) {
-                tampilkanPesanSukses();
+                tampilkanPesanSukses(); // fallback kalau response bukan JSON
                 form.reset();
                 peminatanGroup.style.display = "none";
             }
