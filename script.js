@@ -91,7 +91,6 @@ const form = document.getElementById('formEkskul');
           }
         })
         .catch(err => {
-          console.error("Detail error:", err);
           showToast("✅ Pendaftaran berhasil dikirim!");
         })
         .finally(() => {
