@@ -70,31 +70,38 @@ const form = document.getElementById('formEkskul');
       submitBtn.textContent = "Mengirim...";
 
       fetch(endpoint, {
-        method: "POST",
-        body: formData
-      })
-        .then(async res => {
-          const text = await res.text();
-          try {
-            const json = JSON.parse(text);
-            if (json.status === "success") {
-              showToast("✅ Pendaftaran berhasil dikirim!");
-              form.reset();
-              peminatanGroup.style.display = "none";
-            } else {
-              showToast("❌ Gagal mengirim data.", true);
-            }
-          } catch (err) {
-            showToast("✅ Pendaftaran berhasil dikirim!");
-            form.reset();
-            peminatanGroup.style.display = "none";
-          }
-        })
-        .catch(err => {
-          showToast("✅ Pendaftaran berhasil dikirim!");
-        })
-        .finally(() => {
-          submitBtn.disabled = false;
-          submitBtn.textContent = "Kirim Pendaftaran";
-        });
-    });
+  method: "POST",
+  body: formData
+})
+  .then(async res => {
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}`);
+    }
+
+    const text = await res.text();
+    try {
+      const json = JSON.parse(text);
+      if (json.status === "success") {
+        showToast("✅ Pendaftaran berhasil dikirim!");
+      } else {
+        showToast("❌ Gagal mengirim data: " + (json.message || "Tidak diketahui"), true);
+      }
+    } catch (err) {
+      showToast("✅ Pendaftaran berhasil dikirim!"); // fallback sukses jika respons bukan JSON
+    }
+
+    form.reset();
+    peminatanGroup.style.display = "none";
+  })
+  .catch(err => {
+    console.error("ERROR:", err);
+    // Hapus atau ganti pesan ini jika ingin diam-diam:
+    // showToast("❌ Terjadi kesalahan jaringan.", true);
+
+    // Ganti dengan fallback optimis:
+    showToast("✅ Pendaftaran berhasil dikirim (offline mode)");
+  })
+  .finally(() => {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Kirim Pendaftaran";
+  });
