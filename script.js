@@ -1,43 +1,39 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('formEkskul');
-  const notif = document.getElementById('notif');
-  const itDevCheckbox = document.querySelector('input[value="IT Developer Club"]');
-  const peminatanGroup = document.getElementById('peminatan-group');
-  const peminatanSelect = document.getElementById('peminatan');
-  const submitBtn = document.getElementById('submitBtn');
+const form = document.getElementById('formEkskul');
+const notif = document.getElementById('notif');
+const itDevCheckbox = document.querySelector('input[value="IT Developer Club"]');
+const peminatanGroup = document.getElementById('peminatan-group');
+const peminatanSelect = document.getElementById('peminatan');
+const saranEkskul = document.getElementById('saranEkskul').value.trim();
+const submitBtn = document.getElementById('submitBtn');
 
-  // Tampilkan/sembunyikan peminatan
-  itDevCheckbox.addEventListener('change', () => {
+itDevCheckbox.addEventListener('change', () => {
     peminatanGroup.style.display = itDevCheckbox.checked ? 'block' : 'none';
     if (!itDevCheckbox.checked) {
-      peminatanSelect.value = "";
+        peminatanSelect.value = "";
     }
-  });
+});
 
-  // Maksimal 3 ekstrakurikuler
-  document.querySelectorAll('input[name="ekskul"]').forEach(cb => {
+document.querySelectorAll('input[name="ekskul"]').forEach(cb => {
     cb.addEventListener('change', () => {
-      const selected = document.querySelectorAll('input[name="ekskul"]:checked');
-      if (selected.length > 3) {
-        cb.checked = false;
-        showToast("⚠️ Maksimal 3 ekstrakurikuler boleh dipilih.");
-      }
+        const selected = document.querySelectorAll('input[name="ekskul"]:checked');
+        if (selected.length > 3) {
+            cb.checked = false;
+            showToast("⚠️ Maksimal 3 ekstrakurikuler boleh dipilih.");
+        }
     });
-  });
+});
 
-  // Notifikasi Toast
-  function showToast(message, isError = false) {
+function showToast(message, isError = false) {
     const toast = document.getElementById("toast");
     toast.textContent = message;
     toast.style.backgroundColor = isError ? "#e53e3e" : "#48bb78";
     toast.style.display = "block";
     setTimeout(() => {
-      toast.style.display = "none";
+        toast.style.display = "none";
     }, 3000);
-  }
+}
 
-  // Proses Submit
-  form.addEventListener('submit', function (e) {
+form.addEventListener('submit', function (e) {
     e.preventDefault();
 
     const nama = document.getElementById('nama').value.trim();
@@ -48,20 +44,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const peminatan = peminatanSelect.value;
 
     if (checkedEkskul.length === 0 || checkedEkskul.length > 3) {
-      notif.textContent = "⚠️ Pilih minimal 1 dan maksimal 3 ekstrakurikuler tambahan.";
-      notif.classList.remove('hidden');
-      return;
+        notif.textContent = "⚠️ Pilih minimal 1 dan maksimal 3 ekstrakurikuler tambahan.";
+        notif.classList.remove('hidden');
+        return;
     }
 
     if (checkedEkskul.includes("IT Developer Club") && peminatan === "") {
-      notif.textContent = "⚠️ Pilih peminatan di IT Developer Club.";
-      notif.classList.remove('hidden');
-      return;
+        notif.textContent = "⚠️ Pilih peminatan di IT Developer Club.";
+        notif.classList.remove('hidden');
+        return;
     }
 
     notif.classList.add('hidden');
 
     const endpoint = "https://script.google.com/macros/s/AKfycbzD8jWYWEeVh8IJT-Kh4p2UAl9tleScRwr2gA5lXtQWj4sF-1509LjkGarYJImyt1Tkqw/exec";
+
     const formData = new FormData();
     formData.append("nama", nama);
     formData.append("kelas", kelas);
@@ -69,39 +66,48 @@ document.addEventListener('DOMContentLoaded', () => {
     formData.append("alasan", alasan);
     formData.append("ekskul", checkedEkskul.join(", "));
     formData.append("peminatan", checkedEkskul.includes("IT Developer Club") ? peminatan : "");
+    formData.append("saranEkskul", saranEkskul);
 
     submitBtn.disabled = true;
     submitBtn.textContent = "Mengirim...";
 
-   fetch(endpoint, {
-  method: "POST",
-  body: formData
-})
-.then(async res => {
-  const text = await res.text(); // Ambil respons sebagai teks
-  let isSuccess = false;
-
-  try {
-    const json = JSON.parse(text); // Coba parse ke JSON
-    isSuccess = json.status === "success";
-  } catch (e) {
-    // Fallback: respons bukan JSON, tapi bisa dianggap sukses jika status 200 dan mengandung kata "success"
-    isSuccess = res.ok && text.toLowerCase().includes("success");
-  }
-
-  if (isSuccess) {
-    showToast("✅ Pendaftaran berhasil dikirim!");
-    form.reset();
-    peminatanGroup.style.display = "none";
-  } else {
-    showToast("❌ Gagal mengirim data.", true);
-  }
-})
-.catch(err => {
-  console.error("Detail error:", err);
-  showToast("❌ Terjadi kesalahan jaringan.", true);
-})
-.finally(() => {
-  submitBtn.disabled = false;
-  submitBtn.textContent = "Kirim Pendaftaran";
+    fetch(endpoint, {
+        method: "POST",
+        body: formData
+    })
+        .then(async res => {
+            const text = await res.text();
+            try {
+                const json = JSON.parse(text);
+                if (json.status === "success") {
+                    showToast("✅ Pendaftaran berhasil dikirim!");
+                    form.reset();
+                    peminatanGroup.style.display = "none";
+                } else {
+                    showToast("❌ Gagal mengirim data.", true);
+                }
+            } catch (err) {
+                showToast("✅ Pendaftaran berhasil dikirim!");
+                form.reset();
+                peminatanGroup.style.display = "none";
+            }
+        })
+        .catch(err => {
+            console.error("Detail error:", err);
+            showToast("❌ Terjadi kesalahan jaringan.", true);
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Kirim Pendaftaran";
+        });
 });
+if (!/^(08|\+628)\d{7,13}$/.test(whatsapp)) {
+    notif.textContent = "⚠️ Masukkan nomor WhatsApp yang valid, hanya angka dan awalan 08 atau +62.";
+    notif.classList.remove('hidden');
+    return;
+}
+if (!/^[A-Za-zÀ-ÿ\s']{3,50}$/.test(nama)) {
+    notif.textContent = "⚠️ Nama hanya boleh huruf, spasi, dan tanda petik.";
+    notif.classList.remove('hidden');
+    return;
+}
