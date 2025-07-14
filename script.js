@@ -5,6 +5,7 @@ const peminatanGroup = document.getElementById('peminatan-group');
 const peminatanSelect = document.getElementById('peminatan');
 const submitBtn = document.getElementById('submitBtn');
 
+// Tampilkan dropdown peminatan jika IT Dev dicentang
 itDevCheckbox.addEventListener('change', () => {
     peminatanGroup.style.display = itDevCheckbox.checked ? 'block' : 'none';
     if (!itDevCheckbox.checked) {
@@ -12,6 +13,7 @@ itDevCheckbox.addEventListener('change', () => {
     }
 });
 
+// Batas maksimal 3 ekskul
 document.querySelectorAll('input[name="ekskul"]').forEach(cb => {
     cb.addEventListener('change', () => {
         const selected = document.querySelectorAll('input[name="ekskul"]:checked');
@@ -23,6 +25,7 @@ document.querySelectorAll('input[name="ekskul"]').forEach(cb => {
     });
 });
 
+// Saat form dikirim
 form.addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -34,28 +37,25 @@ form.addEventListener('submit', function (e) {
     const checkedEkskul = Array.from(document.querySelectorAll('input[name="ekskul"]:checked')).map(el => el.value);
     const peminatan = peminatanSelect.value;
 
-    // Validasi WhatsApp
+    // Validasi
     if (!/^(08|\+628)[0-9]{7,13}$/.test(whatsapp)) {
         notif.textContent = "⚠️ Masukkan nomor WhatsApp yang valid, hanya angka dan awalan 08 atau +62.";
         notif.classList.remove('hidden');
         return;
     }
 
-    // Validasi Nama
     if (!/^[A-Za-zÀ-ÿ\s']{3,50}$/.test(nama)) {
         notif.textContent = "⚠️ Nama hanya boleh huruf, spasi, dan tanda petik.";
         notif.classList.remove('hidden');
         return;
     }
 
-    // Validasi Jumlah Ekstrakurikuler
     if (checkedEkskul.length === 0 || checkedEkskul.length > 3) {
         notif.textContent = "⚠️ Pilih minimal 1 dan maksimal 3 ekstrakurikuler tambahan.";
         notif.classList.remove('hidden');
         return;
     }
 
-    // Validasi Peminatan jika pilih IT Dev
     if (checkedEkskul.includes("IT Developer Club") && peminatan === "") {
         notif.textContent = "⚠️ Pilih peminatan di IT Developer Club.";
         notif.classList.remove('hidden');
@@ -64,55 +64,53 @@ form.addEventListener('submit', function (e) {
 
     notif.classList.add('hidden');
 
+    // Endpoint Google Apps Script
     const endpoint = "https://script.google.com/macros/s/AKfycbzD8jWYWEeVh8IJT-Kh4p2UAl9tleScRwr2gA5lXtQWj4sF-1509LjkGarYJImyt1Tkqw/exec";
 
-    const payload = {
-        nama,
-        kelas,
-        whatsapp,
-        alasan,
-        ekskul: checkedEkskul.join(", "),
-        peminatan: checkedEkskul.includes("IT Developer Club") ? peminatan : "",
-        saranEkskul
-    };
+    // Pakai FormData (bukan JSON!)
+    const formData = new FormData();
+    formData.append("nama", nama);
+    formData.append("kelas", kelas);
+    formData.append("whatsapp", whatsapp);
+    formData.append("alasan", alasan);
+    formData.append("ekskul", checkedEkskul.join(", "));
+    formData.append("peminatan", checkedEkskul.includes("IT Developer Club") ? peminatan : "");
+    formData.append("saranEkskul", saranEkskul);
 
     submitBtn.disabled = true;
     submitBtn.textContent = "Mengirim...";
 
+    // Kirim data ke Apps Script
     fetch(endpoint, {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
+        body: formData
     })
-        .then(async res => {
-            const text = await res.text();
-            try {
-                const json = JSON.parse(text);
-                if (json.status === "success") {
-                    tampilkanPesanSukses();
-                    form.reset();
-                    peminatanGroup.style.display = "none";
-                } else {
-                    notif.textContent = "❌ Gagal mengirim data.";
-                    notif.classList.remove('hidden');
-                }
-            } catch (err) {
-                tampilkanPesanSukses(); // fallback kalau response bukan JSON
+    .then(async res => {
+        const text = await res.text();
+        try {
+            const json = JSON.parse(text);
+            if (json.status === "success") {
+                tampilkanPesanSukses();
                 form.reset();
                 peminatanGroup.style.display = "none";
+            } else {
+                notif.textContent = "❌ Gagal mengirim data.";
+                notif.classList.remove('hidden');
             }
-        })
-        .catch(err => {
-            console.error("Detail error:", err);
-            notif.textContent = "❌ Terjadi kesalahan jaringan.";
+        } catch (err) {
+            notif.textContent = "❌ Gagal mengurai respon server.";
             notif.classList.remove('hidden');
-        })
-        .finally(() => {
-            submitBtn.disabled = false;
-            submitBtn.textContent = "Kirim Pendaftaran";
-        });
+        }
+    })
+    .catch(err => {
+        console.error("Detail error:", err);
+        notif.textContent = "❌ Terjadi kesalahan jaringan.";
+        notif.classList.remove('hidden');
+    })
+    .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Kirim Pendaftaran";
+    });
 });
 
 function tampilkanPesanSukses() {
